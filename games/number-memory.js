@@ -19,7 +19,7 @@
   }
 
   function isValidSettings(value) {
-    return isObject(value) && Number.isInteger(value.digits) && value.digits >= 1 && value.digits <= 50 &&
+    return isObject(value) && Number.isInteger(value.digits) && value.digits >= 1 && value.digits <= 30 &&
       Number.isFinite(value.displaySeconds) && value.displaySeconds >= 0.5 && value.displaySeconds <= 30 &&
       typeof value.untilEnter === "boolean" && Number.isSafeInteger(value.questions) && value.questions >= 1 &&
       typeof value.endless === "boolean" && typeof value.increaseDifficulty === "boolean" &&
@@ -77,7 +77,7 @@
           <h3 id="settings-title" class="mt-6 text-lg font-semibold">Settings</h3>
           <form id="settings-form" class="mt-4 space-y-4" autocomplete="off" novalidate>
             <div class="grid gap-4 sm:grid-cols-2">
-              <div><label for="digits-input" class="block text-sm font-medium">Digits per number (1–50)</label><input id="digits-input" class="mt-1 block min-h-11 w-full rounded-md border border-slate-400 bg-white px-3 py-2 text-base text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-100 dark:focus-visible:outline-blue-300" type="number" inputmode="numeric" min="1" max="50" step="1"></div>
+              <div><label for="digits-input" class="block text-sm font-medium">Digits per number (1–30)</label><input id="digits-input" class="mt-1 block min-h-11 w-full rounded-md border border-slate-400 bg-white px-3 py-2 text-base text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-100 dark:focus-visible:outline-blue-300" type="number" inputmode="numeric" min="1" max="30" step="1"></div>
               <div><label for="time-input" class="block text-sm font-medium">Display time (seconds)</label><input id="time-input" class="mt-1 block min-h-11 w-full rounded-md border border-slate-400 bg-white px-3 py-2 text-base text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-100 dark:focus-visible:outline-blue-300" type="number" inputmode="decimal" min="0.5" max="30" step="0.1"></div>
               <div><label for="questions-input" class="block text-sm font-medium">Number of questions</label><input id="questions-input" class="mt-1 block min-h-11 w-full rounded-md border border-slate-400 bg-white px-3 py-2 text-base text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-100 dark:focus-visible:outline-blue-300" type="number" inputmode="numeric" min="1" step="1"></div>
               <div><label for="between-seconds-input" class="block text-sm font-medium">Countdown between questions (seconds; 0 = none)</label><input id="between-seconds-input" class="mt-1 block min-h-11 w-full rounded-md border border-slate-400 bg-white px-3 py-2 text-base text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-100 dark:focus-visible:outline-blue-300" type="number" inputmode="numeric" min="0" step="1"></div>
@@ -98,12 +98,12 @@
         </section>
         <section id="round-panel" class="hidden" aria-labelledby="round-heading">
           <h3 id="round-heading" class="h-7 truncate text-lg font-semibold"></h3>
-          <div id="number-container" class="mt-8 flex h-48 w-full flex-col items-center rounded-lg border border-slate-300 bg-slate-50 px-3 dark:border-slate-700 dark:bg-slate-900">
-            <p id="number-display" class="flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden break-all text-center font-mono text-xl font-bold leading-7 tracking-normal tabular-nums max-[240px]:text-base max-[240px]:leading-6 sm:text-3xl sm:leading-9 sm:tracking-wide" role="status" aria-atomic="true" tabindex="-1"></p>
-            <div class="grid h-11 w-full shrink-0 grid-cols-1 place-items-center">
-              <button id="ready-button" class="invisible col-start-1 row-start-1 min-h-11 rounded-md border border-slate-400 px-4 py-2 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:border-slate-600 dark:focus-visible:outline-blue-300" type="button" disabled>Ready</button>
-              <button id="between-continue-button" class="invisible col-start-1 row-start-1 min-h-11 rounded-md border border-slate-400 px-4 py-2 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:border-slate-600 dark:focus-visible:outline-blue-300" type="button" disabled>Continue</button>
-            </div>
+          <div id="number-container" class="mt-8 flex h-24 w-full items-center justify-center rounded-lg border border-slate-300 bg-slate-50 px-3 dark:border-slate-700 dark:bg-slate-900">
+            <p id="number-display" class="flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden break-all text-center font-mono text-xl font-bold leading-7 tracking-normal tabular-nums max-[240px]:text-base max-[240px]:leading-6 sm:text-3xl sm:leading-9 sm:tracking-wide focus:outline-none" role="status" aria-atomic="true" tabindex="-1"></p>
+          </div>
+          <div class="mt-1 grid h-11 w-full shrink-0 grid-cols-1 place-items-center">
+            <button id="ready-button" class="invisible col-start-1 row-start-1 min-h-11 rounded-md border border-slate-400 px-4 py-2 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:border-slate-600 dark:focus-visible:outline-blue-300" type="button" disabled>Ready</button>
+            <button id="between-continue-button" class="invisible col-start-1 row-start-1 min-h-11 rounded-md border border-slate-400 px-4 py-2 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:border-slate-600 dark:focus-visible:outline-blue-300" type="button" disabled>Continue</button>
           </div>
           <form id="answer-form" class="mt-4 space-y-4" autocomplete="off" novalidate><label for="answer-input" class="block text-sm font-medium">Type the number</label><input id="answer-input" class="block min-h-12 w-full rounded-md border border-slate-400 bg-white px-3 py-2 font-mono text-xl text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:bg-slate-950 dark:text-slate-100 dark:focus-visible:outline-blue-300" type="text" inputmode="numeric" autocomplete="off" autocapitalize="off" spellcheck="false" disabled><button id="answer-submit-button" type="submit" class="min-h-11 w-full rounded-md bg-blue-800 px-4 py-2 font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-blue-700 dark:focus-visible:outline-blue-300" disabled>Submit answer</button></form>
           <section id="result-panel" class="hidden mt-8 space-y-3" aria-live="polite"><p id="result-status" class="text-lg font-semibold" tabindex="-1"></p><p class="break-all">Correct number: <code id="result-number" class="font-mono text-lg"></code></p><p class="break-all">Your answer: <code id="result-answer" class="font-mono text-lg"></code></p><p class="break-words text-sm"><span class="font-semibold">Differences:</span> <span id="result-differences"></span></p><button id="continue-button" class="min-h-11 w-full rounded-md bg-blue-800 px-4 py-2 font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:bg-blue-700 dark:focus-visible:outline-blue-300" type="button">See summary</button></section>
@@ -145,8 +145,8 @@
       let state = "settings", sessionSettings = null, currentDigits = settings.digits, target = "";
       let history = [], correctCount = 0, runLongest = 0, timerId = null, timerVersion = 0;
 
-      const NUMBER_DISPLAY_CLASSES = "flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden break-all text-center font-mono text-xl font-bold leading-7 tracking-normal tabular-nums max-[240px]:text-base max-[240px]:leading-6 sm:text-3xl sm:leading-9 sm:tracking-wide";
-      const MESSAGE_DISPLAY_CLASSES = "flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden break-words px-2 text-center font-sans text-sm font-medium leading-5 tracking-normal sm:text-base sm:leading-6";
+      const NUMBER_DISPLAY_CLASSES = "flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden break-all text-center font-mono text-xl font-bold leading-7 tracking-normal tabular-nums max-[240px]:text-base max-[240px]:leading-6 sm:text-3xl sm:leading-9 sm:tracking-wide focus:outline-none";
+      const MESSAGE_DISPLAY_CLASSES = "flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden break-words px-2 text-center font-sans text-sm font-medium leading-5 tracking-normal sm:text-base sm:leading-6 focus:outline-none";
 
       function readSettings() {
         const value = {
@@ -165,7 +165,7 @@
         const nextSettings = readSettings();
         if (!nextSettings) {
           if (showError) {
-            settingsError.textContent = "Check the digit count, display time, question count, countdown and answer delay values.";
+            settingsError.textContent = "Check the digit count (1–30), display time, question count, countdown and answer delay values.";
             settingsError.classList.remove("hidden");
             digitsInput.focus();
           }
@@ -231,15 +231,6 @@
         }, delay);
       }
 
-      function scheduleAfterSeconds(callback, seconds, expectedState) {
-        const chunkSeconds = Math.min(seconds, Math.floor(MAX_TIMEOUT_SECONDS));
-        schedule(() => {
-          const remainingSeconds = seconds - chunkSeconds;
-          if (remainingSeconds > 0) scheduleAfterSeconds(callback, remainingSeconds, expectedState);
-          else callback();
-        }, chunkSeconds * 1000, expectedState);
-      }
-
       function updateRoundHeading() {
         const round = history.length + 1;
         const label = sessionSettings.endless ? "Round " + round : "Round " + round + " of " + sessionSettings.questions;
@@ -292,6 +283,16 @@
         return "Next question in " + seconds + (seconds === 1 ? " second." : " seconds.");
       }
 
+      function countdownTick(remainingSeconds) {
+        if (state !== "countdown") return;
+        setDisplayMessage(countdownText(remainingSeconds));
+        if (remainingSeconds <= 1) {
+          schedule(displayNumber, 1000, "countdown");
+          return;
+        }
+        schedule(() => countdownTick(remainingSeconds - 1), 1000, "countdown");
+      }
+
       function beginCountdown() {
         if (state !== "waiting") return;
         setButtonVisible(betweenContinueButton, false);
@@ -301,10 +302,9 @@
           return;
         }
         state = "countdown";
-        setDisplayMessage(countdownText(seconds));
         keyboardHint.textContent = "Escape: return to settings.";
         numberDisplay.focus();
-        scheduleAfterSeconds(displayNumber, seconds, "countdown");
+        countdownTick(seconds);
       }
 
       function startNextQuestion() {
@@ -335,6 +335,20 @@
         answerInput.focus();
       }
 
+      function updateAnswerDelay(deadline) {
+        if (state !== "answer-delay") return;
+        const remainingMilliseconds = deadline - window.performance.now();
+        if (remainingMilliseconds <= 0) {
+          showAnswerInput();
+          return;
+        }
+        const tenthsRemaining = Math.max(1, Math.ceil(remainingMilliseconds / 100));
+        const secondsRemaining = tenthsRemaining / 10;
+        const delayText = "Input disabled — unlocks in " + secondsRemaining + (secondsRemaining === 1 ? " second." : " seconds.");
+        setDisplayMessage(delayText);
+        schedule(() => updateAnswerDelay(deadline), Math.max(1, Math.min(1000, remainingMilliseconds)), "answer-delay");
+      }
+
       function hideDigits() {
         if (state !== "showing") return;
         cancelTimer();
@@ -348,10 +362,10 @@
           return;
         }
         const duration = sessionSettings.answerDelaySeconds;
-        setDisplayMessage("Input disabled — unlocks in " + duration + (duration === 1 ? " second." : " seconds."));
         keyboardHint.textContent = "Escape: return to settings.";
+        const deadline = window.performance.now() + duration * 1000;
+        updateAnswerDelay(deadline);
         numberDisplay.focus();
-        scheduleAfterSeconds(showAnswerInput, duration, "answer-delay");
       }
 
       function differenceText(shown, typed) {
@@ -377,7 +391,7 @@
           records.longest = Math.max(records.longest, target.length);
           Memo.storage.setJSON(RECORDS_KEY, records, isValidRecords);
           updatePersonalBest();
-          if (sessionSettings.increaseDifficulty) currentDigits = Math.min(50, currentDigits + 1);
+          if (sessionSettings.increaseDifficulty) currentDigits = Math.min(30, currentDigits + 1);
           if (!sessionSettings.endless && history.length >= sessionSettings.questions) showSummary();
           else startNextQuestion();
           return;
