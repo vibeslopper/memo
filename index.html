@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Memo — Memorisation games</title>
+    <link rel="stylesheet" href="./output.css">
+  </head>
+  <body class="min-h-screen bg-white font-sans text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <main class="mx-auto flex min-h-screen w-full max-w-lg flex-col px-4 py-8 sm:py-12">
+      <header class="mb-8 text-center">
+        <h1 class="text-3xl font-bold tracking-tight">Memo</h1>
+        <p class="mt-2 text-slate-600 dark:text-slate-400">Small games for a sharper memory.</p>
+      </header>
+
+      <section id="home-screen" aria-labelledby="home-title">
+        <h2 id="home-title" class="mb-4 text-xl font-semibold">Choose a game</h2>
+        <ul id="game-list" class="space-y-3"></ul>
+      </section>
+
+      <section id="game-screen" class="hidden" aria-label="Game">
+        <div id="game-content"></div>
+      </section>
+    </main>
+
+    <script src="./common.js"></script>
+    <script src="./games/number-memory.js"></script>
+    <script>
+      Memo.start();
+    </script>
+  </body>
+</html>
